@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+   /* Configure integrated VS Code Terminal */
+   "presentation": {
+      "echo": false,
+      "reveal": "always",
+      "focus": true,
+      "panel": "dedicated",
+      "showReuseMessage": true,
+  },
+  "tasks": [
+      {
+          "label": "build",
+          "type": "shell",
+          "command": "make clean; make",
+          "problemMatcher": []
+      },
+  ]
+}
