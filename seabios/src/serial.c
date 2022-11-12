@@ -48,12 +48,18 @@ serial_setup(void)
     u16 count = 0;
     count += detect_serial(PORT_SERIAL1, 0x0a, count);
     count += detect_serial(PORT_SERIAL2, 0x0a, count);
-    count += detect_serial(PORT_SERIAL3, 0x0a, count);
-    count += detect_serial(PORT_SERIAL4, 0x0a, count);
+    // count += detect_serial(PORT_SERIAL3, 0x0a, count);
+    // count += detect_serial(PORT_SERIAL4, 0x0a, count);
     dprintf(1, "Found %d serial ports\n", count);
 
     // Equipment word bits 9..11 determing # serial ports
     set_equipment_flags(0xe00, count << 9);
+
+    // Hack to make serial mice working
+    outb(0xC7, PORT_SERIAL1+SEROFF_FCR);  // Setup, clear and enable FIFO (11000111b)
+    outb(0x0, PORT_SERIAL1+SEROFF_FCR);   // Disable FIFO
+    outb(0xC7, PORT_SERIAL2+SEROFF_FCR);  // Setup, clear and enable FIFO (11000111b)
+    outb(0x0, PORT_SERIAL2+SEROFF_FCR);   // Disable FIFO
 }
 
 static u16
