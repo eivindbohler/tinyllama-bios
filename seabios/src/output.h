@@ -32,9 +32,10 @@ void __set_code_unimplemented(struct bregs *regs, u32 linecode
                               , const char *fname);
 void hexdump(const void *d, int len);
 
-#define dprintf(lvl, fmt, args...) do {                         \
-        if (CONFIG_DEBUG_LEVEL && (lvl) <= CONFIG_DEBUG_LEVEL)  \
-            __dprintf((fmt) , ##args );                         \
+#if CONFIG_DEBUG_PRINTS
+#define dprintf(lvl, fmt, args...) do {                     \
+    if (CONFIG_DEBUG_LEVEL && (lvl) <= CONFIG_DEBUG_LEVEL)  \
+        __dprintf((fmt) , ##args );                         \
     } while (0)
 #define debug_enter(regs, lvl) do {                     \
         if ((lvl) && (lvl) <= CONFIG_DEBUG_LEVEL)       \
@@ -46,6 +47,12 @@ void hexdump(const void *d, int len);
     } while (0)
 #define debug_stub(regs)                        \
     __debug_stub((regs), __LINE__, __func__)
+#else
+#define dprintf(lvl, fmt, args...)
+#define debug_enter(regs, lvl)
+#define debug_isr(lvl)
+#define debug_stub(regs)
+#endif
 #define warn_invalid(regs)                      \
     __warn_invalid((regs), __LINE__, __func__)
 #define warn_unimplemented(regs)                        \
