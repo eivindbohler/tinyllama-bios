@@ -117,7 +117,8 @@ struct bios_data_area_s {
 #define FMS_DATA_RATE_MASK          (0xc0)
 
 // Limit of BDA timer_counter field
-#define TICKS_PER_DAY 1573040
+//#define TICKS_PER_DAY 1573040
+#define TICKS_PER_DAY 12584338 // 3579545 / 3 / 8192 * 86400
 
 
 /****************************************************************

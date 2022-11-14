@@ -228,7 +228,8 @@ timer_calc_usec(u32 usecs)
  * PIT setup
  ****************************************************************/
 
-#define PIT_TICK_INTERVAL 65536 // Default interval for 18.2Hz timer
+//#define PIT_TICK_INTERVAL 65536 // Default interval for 18.2Hz timer
+#define PIT_TICK_INTERVAL 8192 // Interval for 145.7 Hz timer
 
 // Return the number of milliseconds in 'ticks' number of timer irqs.
 u32
@@ -252,6 +253,11 @@ pit_setup(void)
     // timer0: binary count, 16bit count, mode 2
     outb(PM_SEL_TIMER0|PM_ACCESS_WORD|PM_MODE2|PM_CNT_BINARY, PORT_PIT_MODE);
     // maximum count of 0000H = 18.2Hz
-    outb(0x0, PORT_PIT_COUNTER0);
-    outb(0x0, PORT_PIT_COUNTER0);
+    //outb(0x0, PORT_PIT_COUNTER0);
+    //outb(0x0, PORT_PIT_COUNTER0);
+
+    // Let's try a 145.7 Hz tick rate; 1193182 / 8192 ~= 145.7.
+    // 8192 decimal is 0x2000
+    outb(0x00, PORT_PIT_COUNTER0); // LSB
+    outb(0x20, PORT_PIT_COUNTER0); // MSB
 }
