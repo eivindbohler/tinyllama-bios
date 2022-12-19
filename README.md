@@ -1,9 +1,14 @@
 # TinyLlama BIOS
 
-This repo contains the tools necessary to build the [TinyLlama](https://github.com/eivindbohler/tinyllama) BIOS (Coreboot/SeaBIOS). 
+This repo contains the tools necessary to build the [TinyLlama](https://github.com/eivindbohler/tinyllama) BIOS (Coreboot/SeaBIOS).  
 Based on the 86Duino project from https://github.com/roboard/build-coreboot
 
-Tested on Ubuntu 16.04 i386 and macOS Big Sur.
+Tested on:
+* Ubuntu 16.04 i386
+* macOS Big Sur x86_64
+* macOS Monterey x86_64 and arm64
+
+Other operating systems and architectures are probably easy to get working as well, but your mileage may vary.
 
 ### Prerequisites
 #### Ubuntu
@@ -11,8 +16,12 @@ Install various tools:
 ```
 $ sudo apt install git build-essential m4 bison flex python texinfo gnat
 ```
-#### macOS
-1. Install [Homebrew](https://brew.sh)
+#### macOS (x86_64)
+For Apple Silicon (arm64) CPUs, [look here](prerequisites_arm.md).
+1. Install [Homebrew](https://brew.sh):
+```
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 2. Install gcc version 6:
 ```
 $ brew install gcc@6
@@ -33,6 +42,6 @@ $ ./build-xgcc.sh
 $ make
 ```
 
-If building is successful, the output ROM file is in the `out/` directory.
-Another file is also made - `out/xxx-padded.rom` - that is padded with `0xFF` to fit 8 MB, for flashing directly to the SPI ROM with a hardware programmer. The coreboot/seabios ROM is located at the end of this 8 MB file.
+If building is successful, the 1 MB output ROM file will be in the `out/` directory.
+Another file is also made - `out/xxx-padded.rom` - padded with `0xFF` to fit 8 MB, for flashing directly to the SPI ROM using a hardware programmer. The Coreboot/SeaBIOS ROM will be located at the end of this 8 MB file.
 
