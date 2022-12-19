@@ -38,7 +38,7 @@ SRCBOTH=misc.c stacks.c output.c string.c x86.c block.c cdrom.c mouse.c kbd.c \
 SRC16=$(SRCBOTH) system.c disk.c font.c
 SRC32FLAT=$(SRCBOTH) post.c memmap.c malloc.c pmm.c romfile.c optionroms.c \
     boot.c bootsplash.c jpeg.c bmp.c \
-    nbsb.c cpu_freq.c spi_flash.c speaker.c \
+    nbsb.c llama_config.c spi_flash.c speaker.c \
     hw/ahci.c hw/pvscsi.c hw/usb-xhci.c hw/usb-hub.c \
     fw/coreboot.c fw/lzmadecode.c fw/csm.c fw/biostables.c \
     fw/paravirt.c fw/shadow.c fw/pciinit.c fw/smm.c fw/smp.c fw/mtrr.c fw/xen.c \

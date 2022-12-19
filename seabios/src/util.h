@@ -12,7 +12,7 @@ void nbsb_write32(u8, u8, u32);
 u8 nbsb_read8(u8, u8);
 void nbsb_write8(u8, u8, u8);
 
-// cpu_freq.c
+// llama_config.c
 extern const int num_cpu_freqs;
 extern int cpu_freqs[];
 u32 get_current_cpu_freq(void);
